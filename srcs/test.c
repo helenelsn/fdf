@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:51:40 by hlesny            #+#    #+#             */
-/*   Updated: 2023/01/23 02:22:02 by Helene           ###   ########.fr       */
+/*   Updated: 2023/01/28 21:41:50 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,14 @@ Pour un pixel (x, y) dont on veut changer la couleur, le(s) octet(s) du pixel so
 // int mlx_pixel_put ( void *mlx_ptr, void *win_ptr, int x, int y, int color );
 // int mlx_string_put ( void *mlx_ptr, void *win_ptr, int x, int y, int color, char *string );
 
-void    image_pixel_put(t_data img, int x, int y, int color) // retourner un booleen pr savoir si ca a marche
-{
-    *(img.addr + (y * img.line_length + x * (img.bits_per_pixel / 8))) = color; // cast automatiquement
-}
-
-void	close2(void *mlx_ptr)
+int	close2(void *mlx_ptr)
 {
 	if (!mlx_loop_end(mlx_ptr))
+    {
         write(2, "Error when closing window\n", 26);
+        return (0);
+    }
+    return (1);
 }
 
 int main()
@@ -81,22 +80,33 @@ int main()
     void *win_ptr;
     int x;
     int y;
-    int offset;
-    int color;
-    int i = -1;
+    unsigned int color;
     
     x = 200;
     y = 500;
-    color = 0xfffafa;
+    color = 0xffffff;
+    
     mlx_ptr = mlx_init(); // mlx_ptr : connection identifier
     win_ptr = mlx_new_window(mlx_ptr, 800, 800, "Bonjour\n");
     img.img = mlx_new_image(mlx_ptr, 800, 800);
-    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+    img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
    
     // modifier la couleur du pixel (150, 270) :
-    img.addr + (img.line_length * 270) + (img.bits_per_pixel / 8 * 150) = mlx_get_color_value(0x00FFA500);
+
+    t_point u;
+    t_point v;
+    u.x = 50;
+    u.y = 50;
+    v.x = 200;
+    v.y = 300;
     
-    mlx_put_image_to_window(mlx_ptr, win_ptr, img.img, 0, 0);
+    draw_line(&img, u, v, color); // tvb
+    
+    
+    
+    
+    mlx_put_image_to_window(mlx_ptr, win_ptr, img.img, 100, 100);
+    
     
     mlx_hook(win_ptr, 33, 1L<<17, close2, mlx_ptr);
     mlx_loop(mlx_ptr);
@@ -107,3 +117,5 @@ int main()
     free(mlx_ptr);
     
 }
+
+// mlx_get_color_value(mlx_ptr, color)

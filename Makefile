@@ -6,7 +6,7 @@
 #    By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 23:23:23 by hlesny            #+#    #+#              #
-#    Updated: 2023/01/21 20:06:18 by hlesny           ###   ########.fr        #
+#    Updated: 2023/01/28 21:29:36 by hlesny           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,20 +14,29 @@ NAME = fdf
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -g3
+
+FLAGS_MINILIBX = -lXext -lX11 -lm
+MLX_DIR = ./minilibx-linux/
+MINILIBX= ./minilibx-linux/libmlx_Linux.a
+
 SRCDIR = ./srcs/
-INCDIR = ./inc/
-MLX_DIR = ./minilibx-linux
+SRCS = test.c shapes.c fdf.c
+
+INC_DIR = ./includes/
+
 OBJDIR = ./objs/
-SRCS = test.c
 OBJS = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
-export C_INCLUDE_PATH=$(INC_DIR):$(MLX_DIR)
+export C_INCLUDE_PATH = $(INC_DIR):$(MLX_DIR)
 export LIBRARY_PATH = $(MLX_DIR)
 
-all : $(NAME)
+all : makeminilibx $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CC) -o $@ $^ -lmlx -lXext -lX11
+	$(CC) -o $@ $^ $(MINILIBX) $(FLAGS_MINILIBX) 
+
+makeminilibx : 
+	make -C $(MLX_DIR)
 
 $(OBJS) : | $(OBJDIR)
 
@@ -38,7 +47,8 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean :
-	$(RM) $(OBJS) 
+	$(RM) $(OBJS) -r $(OBJDIR)
+	make clean -C $(MLX_DIR)
 
 fclean : clean
 	$(RM) $(NAME)
@@ -46,4 +56,4 @@ fclean : clean
 re : fclean all
 
 .PHONY :
-	all clean fclean re
+	re all clean fclean makeminilibx
