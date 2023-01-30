@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:51:40 by hlesny            #+#    #+#             */
-/*   Updated: 2023/01/28 21:41:50 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/01/30 20:54:49 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,7 @@ int main()
     
     
     mlx_destroy_image(mlx_ptr, img.img);
-    mlx_destroy_window(mlx_ptr, win_ptr); // destructeur, qui free(win_ptr)
+    mlx_destroy_window(mlx_ptr, win_ptr); // free(win_ptr)
     free(mlx_ptr);
     
 }
-
-// mlx_get_color_value(mlx_ptr, color)
