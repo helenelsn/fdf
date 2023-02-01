@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 21:01:46 by hlesny            #+#    #+#             */
-/*   Updated: 2023/01/30 20:29:15 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/01 21:03:31 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     t_data img;
     void *mlx_ptr;
     void *win_ptr;
-    t_point **map;
+    t_point3d **map;
     
     if (argc != 2)
     {
