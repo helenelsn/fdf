@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 21:01:46 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/01 21:03:31 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:31:21 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int main(int argc, char **argv)
     // pour chaque ligne, split avec les espaces 
     // -> les coordonnees de chaques point obtenus seront inversees (ie aura (y, x, z))
     
-    t_data img;
-    void *mlx_ptr;
-    void *win_ptr;
+    t_mlx mlx;
     t_point3d **map;
     
     if (argc != 2)
@@ -36,16 +34,16 @@ int main(int argc, char **argv)
         return (-1);
     }
     
-    mlx_ptr = mlx_init();
+    mlx.mlx_ptr = mlx_init();
     //win_ptr = mlx_new_window(mlx_ptr, 800, 800, "Fdf\n");
-    img.img = mlx_new_image(mlx_ptr, 800, 800);
-    img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
+    mlx.image->img = mlx_new_image(mlx_ptr, 800, 800);
+    mlx.image->addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
     
     
     // ********************** A CODER *********************************
     
     map = get_coordinates(); // cette fonction utilise get next line et malloc chaque ligne de l'input 
-    draw_map(mlx_ptr, img, map);
+    draw_map(mlx, map, 0, 0);
 
     // *****************************************************************
 

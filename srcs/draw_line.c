@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:56:48 by hlesny            #+#    #+#             */
-/*   Updated: 2023/01/30 21:11:20 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/02 18:14:18 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int      ft_abs(int x) // abs(x - y)
     return ((((x > 0) * 2) - 1) * x);
 }
 
-unsigned int compute_color(int z1, int z2)
+unsigned int compute_color(int z_min, z_max, int z2)
 {
     int i;
 }

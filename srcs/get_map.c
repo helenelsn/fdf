@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:30:17 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/01 23:48:42 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/02 15:21:18 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,17 @@ static t_point3d **fill_map(char *input)
     while (m[++i])
         fill_row(&map[i], m[i], i);
     map[i] = NULL;
+    // il faut encore mettre la map dans le bon ordre (avecle parsing fait ici, les x t les y sont echanges)
     free_tab(&m);
 }
 
 
 t_point3d **get_coordinates(int fd)
 {
-    // utilise gnl, split, atoi
-    int i;
     char *row;
     char *input;
     
     row_length = 0;
-    i = 0; // comptabilise le nombre de colonnes de l'input
     row = get_next_line(fd);
     input = NULL;
     while (row)
