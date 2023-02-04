@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 02:15:42 by Helene            #+#    #+#             */
-/*   Updated: 2023/02/02 18:16:04 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/04 21:59:44 by Helene           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,12 @@ typedef struct	s_data
 	int		endian;
 }				t_data;
 
-typedef struct s_point
+typedef struct s_point3d
 {
 	int x;
 	int y;
 	int z;
 }				t_point3d;
-
-typedef struct s_z 
-{
-	int z_min;
-	int z_max;
-}				t_z;
 
 typedef struct s_mlx 
 {
@@ -51,6 +45,7 @@ char	**ft_split(const char *str, char charset);
 void	*ft_calloc(size_t nmemb, size_t size);
 long long	ft_atoi(const char *nptr, int *j);
 void    isometric_proj(t_point3d ***map);
+void    rotate(t_point3d ***map)
 
 void    image_pixel_put(t_data *img, int x, int y, unsigned int color);
 
