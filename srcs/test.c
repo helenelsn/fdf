@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:51:40 by hlesny            #+#    #+#             */
-/*   Updated: 2023/01/30 20:54:49 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/05 19:27:50 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <unistd.h>
 #include <math.h>
 #include "shapes.h"
-#include "fdf.h"
 
+void	draw_line(t_data *img, t_point3d u1, t_point3d u2, unsigned int color);
 
 /*
 Évènement clavier :     gere_key(int keycode, void *param);
@@ -93,8 +93,8 @@ int main()
    
     // modifier la couleur du pixel (150, 270) :
 
-    t_point u;
-    t_point v;
+    t_point3d u;
+    t_point3d v;
     u.x = 50;
     u.y = 50;
     v.x = 200;

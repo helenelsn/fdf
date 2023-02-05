@@ -6,13 +6,13 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 19:05:22 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/01 23:18:21 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/05 20:10:21 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
+#include "fdf.h"
 
-int	ft_strlen(char *str)
+int		ft_strlen(char *str)
 {
 	int	i;
 

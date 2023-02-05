@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:30:17 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/04 21:12:12 by Helene           ###   ########.fr       */
+/*   Updated: 2023/02/05 21:57:26 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void fill_row(t_point3d **map, char *row, int x)
     *map = ft_calloc(sizeof(t_point3d), row_length + 1);
     while (s[++i])
         set_point(&(*map)[i], x, i, ft_atoi(s[i]));
-    // (*map)[i] = 
+    set_point(&(*map)[i], 0, 0, 0); // histoire de "null-terminate" les map[i] afin de faciliter le parsing
     // quel est l'equivalent de NULL pour t_point3d pour le dernier element de map[i] ? 
     // pour savoir quand est a la fin d'une ligne lors du parsing qd va tracer la map
 }
@@ -76,6 +76,7 @@ static t_point3d **fill_map(char *input)
     map[i] = NULL;
     // il faut encore mettre la map dans le bon ordre (avecle parsing fait ici, les x t les y sont echanges)
     free_tab(&m);
+    return (map);
 }
 
 
@@ -83,16 +84,16 @@ t_point3d **get_coordinates(int fd)
 {
     char *row; // buffer utilisé pour lire chaque ligne du fichier .fdf
     char *input; // concatène les lignes de l'input, et obtient ainsi un char* correspondant à l'entièreté de la map
+    int row_length;
     
     row_length = 0;
     row = get_next_line(fd);
     input = NULL;
     while (row)
     {
-        ft_strncat(input, row, 0);
+        input = ft_strncat(input, row, 0);
         free(row);
         row = get_next_line(fd);
     }
-    
     return (fill_map(input));
 }

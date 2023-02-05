@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 23:02:12 by Helene            #+#    #+#             */
-/*   Updated: 2023/01/28 21:39:07 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/05 19:27:03 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int ft_abs(int x) // abs(x - y)
     return ((((x > 0) * 2) - 1) * x);
 }
 
-void	line_numerous_y(t_data *img, t_point u1, t_point u2, unsigned int color)
+void	line_numerous_y(t_data *img, t_point3d u1, t_point3d u2, unsigned int color)
 {
     int x;
     int y;
@@ -36,7 +36,7 @@ void	line_numerous_y(t_data *img, t_point u1, t_point u2, unsigned int color)
     }
 }
 
-void    line_numerous_x(t_data *img, t_point u1, t_point u2, unsigned int color)
+void    line_numerous_x(t_data *img, t_point3d u1, t_point3d u2, unsigned int color)
 {
     int x;
     int y;
@@ -55,7 +55,7 @@ void    line_numerous_x(t_data *img, t_point u1, t_point u2, unsigned int color)
     }
 }
 
-void    draw_line(t_data *img, t_point u1, t_point u2, unsigned int color)
+void    draw_line(t_data *img, t_point3d u1, t_point3d u2, unsigned int color)
 {
     if (ft_abs(u1.x - u2.x) >= ft_abs(u1.y - u2.y))
         line_numerous_x(img, u1, u2, color);

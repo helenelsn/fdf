@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shapes.h                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 22:38:36 by Helene            #+#    #+#             */
-/*   Updated: 2023/02/05 19:26:29 by hlesny           ###   ########.fr       */
+/*   Created: 2022/11/25 19:17:36 by hlesny            #+#    #+#             */
+/*   Updated: 2023/02/05 18:29:34 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHAPES_H
-# define SHAPES_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#include <math.h>
+# include <stdlib.h>
+# include <strings.h>
+# include <unistd.h>
 
-typedef struct	s_data 
-{
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
-}				t_data;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-typedef struct s_point3d
-{
-	int x;
-	int y;
-	int z;
-}				t_point3d;
-
-void	draw_line(t_data *img, t_point3d u1, t_point3d u2, unsigned int color); // u1 = (x1, y1), u2 = (x2, y2)
-
-
+char	*get_next_line(int fd);
+int		ft_strlen(char *str);
+char	*ft_substr(char *str, int len);
+char	*ft_strncat(char *line, char *buffer, int len);
 
 #endif

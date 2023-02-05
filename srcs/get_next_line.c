@@ -6,12 +6,11 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 19:00:54 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/01 21:26:40 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/05 18:30:04 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
-#include <fcntl.h>
+#include "fdf.h"
 
 static int	parse_buffer(char *buffer)
 {

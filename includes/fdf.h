@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 02:15:42 by Helene            #+#    #+#             */
-/*   Updated: 2023/02/04 21:59:44 by Helene           ###   ########.fr       */
+/*   Updated: 2023/02/05 22:14:53 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define FDF_H
 
 #include <math.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <mlx.h>
+#include "get_next_line.h"
 
 typedef struct	s_data 
 {
@@ -35,23 +42,31 @@ typedef struct s_mlx
 {
 	void *mlx_ptr;
 	void *win_ptr;
-	t_data *image; // t_data *image ou t_data image ? ie pointeur ou non ?
+	t_data image; // t_data *image ou t_data image ? ie pointeur ou non ?
 }				t_mlx;
 
 typedef t_point3d** map;
 
-char	*get_next_line(int fd);
+// =================== get map datas ===========================
 char	**ft_split(const char *str, char charset);
 void	*ft_calloc(size_t nmemb, size_t size);
-long long	ft_atoi(const char *nptr, int *j);
-void    isometric_proj(t_point3d ***map);
-void    rotate(t_point3d ***map)
+long long	ft_atoi(const char *nptr);
+map 	get_coordinates(int fd);
+
+// =================== draw lines ====================
 
 void    image_pixel_put(t_data *img, int x, int y, unsigned int color);
-
-map 	get_coordinates(int fd);
 void	draw_line(t_data *img, t_point3d u1, t_point3d u2); // u1 = (x1, y1), u2 = (x2, y2)
-void	draw_map(t_mlx mlx, t_point3d **map, int i, int j);
+void	draw_map(t_mlx mlx, t_point3d **map);
+int     end_of_row(t_point3d p, int j);
 
+// ======== projections et operations matricielles ========
+
+void    isometric_proj(t_point3d ***map);
+void    rotate(t_point3d ***map);
+
+// =================== hooks functions ============
+
+int	close2(void *mlx_ptr);
 
 #endif

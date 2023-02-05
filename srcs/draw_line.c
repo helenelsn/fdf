@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Helene <Helene@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:56:48 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/04 22:00:10 by Helene           ###   ########.fr       */
+/*   Updated: 2023/02/05 19:21:07 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,21 @@ static int      ft_abs(int x) // abs(x - y)
     return ((((x > 0) * 2) - 1) * x);
 }
 
+void    image_pixel_put(t_data *img, int x, int y,unsigned int color)
+{
+    char *dst;
+    dst = img->addr + (img->line_length * y) + (img->bpp / 8 * x);
+    *(unsigned int *)dst = color;
+}
+
 // int trgb : noir : rgb à 0 ; blanc : rgb à 255
 // définir (proportionnellement à z_max et z_min ?) la couleur associée à |z1 - z2|, en accord avec z1 et z2 (et |z|_max ?)
 unsigned int compute_color(int z1, int z2)
 {
-    int i;
-    
+    //unsigned int i;
+    (void)z1;
+    (void)z2;
+    return (0xffffff);
 }
 
 static void	    line_numerous_y(t_data *img, t_point3d u1, t_point3d u2)

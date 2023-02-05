@@ -6,11 +6,11 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 04:34:20 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/01 21:40:07 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/05 18:33:17 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
 static char	*ft_strncpy(char *dest, const char *src, unsigned int n)
 {

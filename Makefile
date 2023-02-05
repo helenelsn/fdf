@@ -6,21 +6,22 @@
 #    By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 23:23:23 by hlesny            #+#    #+#              #
-#    Updated: 2023/01/28 21:29:36 by hlesny           ###   ########.fr        #
+#    Updated: 2023/02/05 19:35:50 by hlesny           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -g3
 
 FLAGS_MINILIBX = -lXext -lX11 -lm
 MLX_DIR = ./minilibx-linux/
 MINILIBX= ./minilibx-linux/libmlx_Linux.a
 
 SRCDIR = ./srcs/
-SRCS = test.c shapes.c fdf.c
+SRCS = 	fdf.c get_map.c draw_map.c draw_line.c projection.c mouse_hook.c \
+		get_next_line.c get_next_line_utils.c ft_atoi.c ft_calloc.c  ft_split.c
 
 INC_DIR = ./includes/
 

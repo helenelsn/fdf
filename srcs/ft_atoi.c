@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 01:58:05 by hlesny            #+#    #+#             */
-/*   Updated: 2023/01/17 00:33:28 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/05 18:07:04 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@ static int	is_whitespace(char c)
 		|| c == '\f' || c == '\r');
 }
 
-long long	ft_atoi(const char *nptr, int *j)
+long long	ft_atoi(const char *nptr)
 {
 	int			i;
 	int			neg;
 	long long	number;
 
 	i = 0;
-	if (j)
-		i = *j;
 	neg = 1;
 	number = 0;
 	while (nptr[i] && is_whitespace(nptr[i]))
@@ -39,7 +37,5 @@ long long	ft_atoi(const char *nptr, int *j)
 	while (nptr[i] && (nptr[i] >= '0' && nptr[i] <= '9')
 		&& number <= __INT_MAX__)
 		number = number * 10 + (nptr[i++] - 48);
-	if (j)
-		*j = i;
 	return (neg * number);
 }
