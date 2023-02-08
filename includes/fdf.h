@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 02:15:42 by Helene            #+#    #+#             */
-/*   Updated: 2023/02/05 22:14:53 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/08 00:02:58 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_point3d
 	int x;
 	int y;
 	int z;
+	// int color;
 }				t_point3d;
 
 typedef struct s_mlx 
@@ -55,6 +56,8 @@ map 	get_coordinates(int fd);
 
 // =================== draw lines ====================
 
+void    put_points(t_mlx mlx, t_point3d **map);
+
 void    image_pixel_put(t_data *img, int x, int y, unsigned int color);
 void	draw_line(t_data *img, t_point3d u1, t_point3d u2); // u1 = (x1, y1), u2 = (x2, y2)
 void	draw_map(t_mlx mlx, t_point3d **map);
@@ -62,6 +65,7 @@ int     end_of_row(t_point3d p, int j);
 
 // ======== projections et operations matricielles ========
 
+void    iso(t_point3d ***map, int factor, int y_2d_0, int x_2d_0);
 void    isometric_proj(t_point3d ***map);
 void    rotate(t_point3d ***map);
 

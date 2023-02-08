@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:56:48 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/05 19:21:07 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/06 18:18:08 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ static int      ft_abs(int x) // abs(x - y)
 void    image_pixel_put(t_data *img, int x, int y,unsigned int color)
 {
     char *dst;
-    dst = img->addr + (img->line_length * y) + (img->bpp / 8 * x);
+
+    if (x < 0 || x > 600 || y < 0 || y > 600)    
+        return ;
+    //printf("img->addr = %s\n", img->addr);
+    dst = img->addr + (img->line_length * y) + (x > 0) * (img->bpp / 8 * x); 
+    //printf("dst = %s\n", dst);
     *(unsigned int *)dst = color;
 }
 
