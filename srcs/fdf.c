@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 21:01:46 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/08 00:05:19 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/08 19:07:05 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    print_map(t_point3d** map)
         j = 0;
         while (j == 0 || (j > 0 && map[i][j].y != 0))
         {
-            printf("map[%d][%d] = (%d, %d, %d)\n", i, j, map[i][j].x, map[i][j].y, map[i][j].z);
+            printf("map[%d][%d] = (%d, %d, %d), color = %u\n", i, j, map[i][j].x, map[i][j].y, map[i][j].z, map[i][j].color);
             j++;
         }
         i++;
@@ -40,19 +40,19 @@ int main(int argc, char **argv)
     int fd;
     t_mlx mlx;
     t_point3d **map;
-/*
-    if (argc != 2 || (fd = open(argv[1], O_RDONLY) < 0))
+
+    if (argc != 2)
     {
         write(2, "Input Error\n", 12);
         return (-1);
     }
-*/      
-    
-fd = open("42.fdf", O_RDONLY);
+    fd = open(argv[1], O_RDONLY);
+    if (fd < 0)
+        return (-1);
 
     mlx.mlx_ptr = mlx_init();
-    mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 800, 800, "Fdf");
-    mlx.image.img = mlx_new_image(mlx.mlx_ptr, 600, 600);
+    mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, 1000, 1400, "Fdf");
+    mlx.image.img = mlx_new_image(mlx.mlx_ptr, 1000, 1400);
     mlx.image.addr = mlx_get_data_addr(mlx.image.img, &(mlx.image.bpp), 
                         &(mlx.image.line_length), &(mlx.image.endian));
     
@@ -60,13 +60,11 @@ fd = open("42.fdf", O_RDONLY);
     // ********************** A CODER *********************************
     
     map = get_coordinates(fd);
+    iso(&map, -1, 250, 0);
     print_map(map);
-    iso(&map, 5, 200, 200);
-    //isometric_proj(&map);
-    //printf("\n\n\n\n\n\n\n");
-    //print_map(map);
-    put_points(mlx, map);
-    //draw_map(mlx, map);
+    //put_points(mlx, map);
+    
+    draw_map(mlx, map);
    
 
     // *****************************************************************

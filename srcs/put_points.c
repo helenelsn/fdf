@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:05:27 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/08 00:07:43 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/08 17:34:08 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ void    put_points(t_mlx mlx, t_point3d **map)
         while(j == 0 || (j > 0 && map[i][j].y != 0))
         {
             //printf("tracage de (%d, %d, %d)\n", map[i][j].x, map[i][j].y, map[i][j].z);
-            dst = mlx.image.addr + (mlx.image.line_length * map[i][j].y) 
-                + (map[i][j].x > 0) * (mlx.image.bpp / 8 * map[i][j].x);
-            if (dst > mlx.image.addr + (mlx.image.line_length * 600) + (mlx.image.bpp / 8 * 600))
-                return ;
-            *(unsigned int *)dst = 0xffffff;
+            if (map[i][j].x >= 0 && map[i][j].y >= 0 && map[i][j].x <= 800 && map[i][j].y <= 800)
+            {
+                dst = mlx.image.addr + (mlx.image.line_length * map[i][j].y) 
+                    + (map[i][j].x > 0) * (mlx.image.bpp / 8 * map[i][j].x);
+                //if (dst <= mlx.image.addr + (mlx.image.line_length * 600) + (mlx.image.bpp / 8 * 600))
+                *(unsigned int *)dst = map[i][j].color;
+            }
+            
             //image_pixel_put(mlx.image.img, map[i][j].x, map[i][j].y, 0xffffff);
             j++;
         }

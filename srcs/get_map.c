@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:30:17 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/07 22:48:19 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/08 18:53:26 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,24 @@ void    set_point(t_point3d *u, int x, int y, int z)
     u->z = z;
 }
 
+void    set_color(t_point3d *u, char *s)
+{
+    int i;
+
+    i = 0;
+    u->z = ft_atoi(s, &i);
+    
+    if (s[i]) // ie si a autre chose apres le z, cad une couleur
+    {
+        while (s[i] && (s[i] < '0' || s[i] > '9'))
+            i++;
+        i += 2; 
+        u->color = atoi_base(&s[i]);
+    }
+    else
+        u->color = 0xffffff;// afficher un truc sur stdout et demander a l'utilisateur quelle couleur il souhaite (blanc, vert, etc), et l'assigner ici sous la forme hexa (utiliser un tableau d'enum)
+}
+
 static void fill_row(t_point3d **map, char *row, int j)
 {
     // static pour éviter de devoir calculer à chaque appel à fill_row le nombre de colonnes à malloc,
@@ -47,7 +65,7 @@ static void fill_row(t_point3d **map, char *row, int j)
 
     s = ft_split(row, ' ');
     i = -1;
-    if (!row_length) // ie si c'est le premier appel à fill_row
+    if (!row_length)
     {
         while (s[row_length])
             row_length++;
@@ -56,9 +74,12 @@ static void fill_row(t_point3d **map, char *row, int j)
     *map = ft_calloc(sizeof(t_point3d), row_length + 1);
     while (s[++i])
     {
-        //printf("ligne %d, colonne %d, z = %s\n", j, i, s[i]);
-        set_point(&(*map)[i], x, i * row_length, ft_atoi(s[i]));
+        printf("%s\n", s[i]);
+        (*map)[i].x = x;
+        (*map)[i].y = i * row_length;
+        set_color(&(*map)[i], s[i]);
     }
+        
         
     set_point(&(*map)[i], 0, 0, 0); // histoire de "null-terminate" les map[i] afin de faciliter le parsing
 }
@@ -78,7 +99,6 @@ static t_point3d **fill_map(char *input, int col_length)
         fill_row(&map[i], m[i], i);
     map[i] = NULL;
     
-    //print_map(map);
     free_tab(&m);
     return (map);
 }

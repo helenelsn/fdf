@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 02:15:42 by Helene            #+#    #+#             */
-/*   Updated: 2023/02/08 00:02:58 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/08 19:03:39 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include <mlx.h>
 #include "get_next_line.h"
 
+#define HEXA "0123456789abcdef"
+
 typedef struct	s_data 
 {
 	void	*img;
@@ -36,7 +38,7 @@ typedef struct s_point3d
 	int x;
 	int y;
 	int z;
-	// int color;
+	unsigned int color;
 }				t_point3d;
 
 typedef struct s_mlx 
@@ -49,9 +51,11 @@ typedef struct s_mlx
 typedef t_point3d** map;
 
 // =================== get map datas ===========================
+int		ft_strlen(char *str);
 char	**ft_split(const char *str, char charset);
 void	*ft_calloc(size_t nmemb, size_t size);
-long long	ft_atoi(const char *nptr);
+long long	ft_atoi(const char *nptr, int *i);
+unsigned int	atoi_base(const char *s);
 map 	get_coordinates(int fd);
 
 // =================== draw lines ====================
