@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:56:48 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/08 19:04:22 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/08 21:49:22 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void    image_pixel_put(t_data *img, int x, int y, unsigned int color)
 {
     char *dst;
 
-    if (x < 0 || x > 1400 || y < 0 || y > 1400)    
+    if (x < 0 || x > 2000 || y < 0 || y > 1800)    
         return ;
     //printf("img->addr = %s\n", img->addr);
     dst = img->addr + (img->line_length * y) + (x > 0) * (img->bpp / 8 * x); 

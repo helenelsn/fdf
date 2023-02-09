@@ -1,7 +1,5 @@
 
 - Implémenter une gestion du gradient de couleur via z (garder en mémoire z_min et z_max ? ou juste |z|_max ?)
-- Gérer les inputs en héxadécimal (si commence par 0x, est en base 16, 
-    utiliser alors convert_base pour obtenir l'équivalent en base 10)
 
 - A gérer pour la partie mandatory : 
     - The management of your window must remain smooth (changing to another window, minimizing, and so forth).

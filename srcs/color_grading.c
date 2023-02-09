@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hook.c                                         :+:      :+:    :+:   */
+/*   color_grading.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 18:35:08 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/09 18:29:33 by hlesny           ###   ########.fr       */
+/*   Created: 2023/02/08 21:51:15 by hlesny            #+#    #+#             */
+/*   Updated: 2023/02/09 00:00:01 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	key_press(int keycode, void *mlx_ptr)
+static void    set_color(t_point3d *map, int z_min)
 {
-    if (keycode == KEY_ESC)
+    unsigned int y_min; // blue
+    int a;
+
+    a = y_min / z_min;
+    y_min = 0x4876ff;
+    return (y_min + (y_min / z_min) * ((*map).z - z_min));
+}
+
+void    get_colors(t_point3d ***map, int z_min)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while ((*map)[i])
     {
-        if (!mlx_loop_end(mlx_ptr))
+        j = 0;
+        while (j == 0 || (j > 0 && (*map)[i][j].y != 0))
         {
-            write(2, "Error when closing window\n", 26);
-            return (0);
+            set_color(&(*map)[i][j], z_min);
+            j++;
         }
+        i++;
     }
-    return (1);
 }

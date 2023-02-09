@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:28:54 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/08 19:05:50 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/09 18:35:19 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,49 +18,6 @@ double deg_to_rad(double d)
 {
     return (d * (M_PI / 180.0));
 }
-
-static void    transform_iso(t_point3d *map)
-{
-    double alpha;
-    double beta;
-    int x;
-    int y;
-
-    alpha = deg_to_rad(30);
-    beta = deg_to_rad(45);
-    x = map->x * cos(beta) - map->z * sin(beta);
-    y = map->x * sin(alpha) * sin(beta) + map->y * cos(alpha) + map->z * sin(alpha) * cos(beta);
-    //printf("x = %d, x_iso = %d, y = %d, y_iso = %d\n", map->x, x, map->y, y);
-    map->x = x;
-    map->y = y; // s'en blc de  mettre z a 0, l'utilise pas pour tracer les lignes apres (mais en a besoin pr le gradient de couleurs)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-}
-
-void    isometric_proj(t_point3d ***map)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    //printf("\n\n\n dans la fonction de projection, avant :\n");
-    //print_map(*map);
-    while ((*map)[i])
-    {
-        j = 0;
-        while (j == 0 || (j > 0 && (*map)[i][j].y != 0))
-        {
-            //printf("map[%d][%d] = (%d, %d, %d)\n", i, j, (*map)[i][j].x, (*map)[i][j].y, (*map)[i][j].z);
-            transform_iso(&(*map)[i][j]); //bonne syntaxe ? ou est-ce que & et * s'annulent ? 
-            //printf("map[%d][%d] = (%d, %d, %d)\n", i, j, (*map)[i][j].x, (*map)[i][j].y, (*map)[i][j].z);
-            j++;
-        }
-        i++;
-    }
-    //printf("\n\n\n dans la fonction de projection, apres :\n");
-    //print_map(*map);
-}
-
-
 
 void    iso(t_point3d ***map, int factor, int y_2d_0, int x_2d_0)
 {

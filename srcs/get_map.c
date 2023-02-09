@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:30:17 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/08 18:53:26 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:11:31 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void    set_point(t_point3d *u, int x, int y, int z)
     u->z = z;
 }
 
-void    set_color(t_point3d *u, char *s)
+void    get_color(t_point3d *u, char *s, int coef)
 {
     int i;
 
     i = 0;
-    u->z = ft_atoi(s, &i);
+    u->z = ft_atoi(s, &i) * coef;
     
     if (s[i]) // ie si a autre chose apres le z, cad une couleur
     {
@@ -53,7 +53,7 @@ void    set_color(t_point3d *u, char *s)
         u->color = 0xffffff;// afficher un truc sur stdout et demander a l'utilisateur quelle couleur il souhaite (blanc, vert, etc), et l'assigner ici sous la forme hexa (utiliser un tableau d'enum)
 }
 
-static void fill_row(t_point3d **map, char *row, int j)
+static void fill_row(t_point3d **map, t_point3d **map_0, char *row, int j)
 {
     // static pour éviter de devoir calculer à chaque appel à fill_row le nombre de colonnes à malloc,
     // car part du principe que la map sera "homogène" 
@@ -72,39 +72,47 @@ static void fill_row(t_point3d **map, char *row, int j)
     }
     x = j * row_length;
     *map = ft_calloc(sizeof(t_point3d), row_length + 1);
+    *map_0 = ft_calloc(sizeof(t_point3d), row_length + 1);
     while (s[++i])
     {
-        printf("%s\n", s[i]);
         (*map)[i].x = x;
         (*map)[i].y = i * row_length;
-        set_color(&(*map)[i], s[i]);
+        (*map_0)[i].x = (*map)[i].x; // ca mache de faire comme ca ?
+        (*map_0)[i].y = (*map)[i].y;
+        get_color(&(*map)[i], s[i], 1);
+        (*map_0)[i].z = (*map)[i].z;
+        (*map_0)[i].color = (*map)[i].color;
     }
-        
-        
     set_point(&(*map)[i], 0, 0, 0); // histoire de "null-terminate" les map[i] afin de faciliter le parsing
+    set_point(&(*map_0)[i], 0, 0, 0);
 }
 
-static t_point3d **fill_map(char *input, int col_length)
+static void fill_map(t_map *maps, char *input, int col_length)
 {
     int i;
     char **m;
+    t_point3d **map_0;
     t_point3d **map;
     
     i = -1;
     
     m = ft_split(input, '\n'); 
-    map = ft_calloc(sizeof(t_point3d *), col_length + 1); 
+    map_0 = ft_calloc(sizeof(t_point3d *), col_length + 1); 
+    map = ft_calloc(sizeof(t_point3d *), col_length + 1);
 
     while (m[++i])
-        fill_row(&map[i], m[i], i);
+        fill_row(&map[i], &map_0[i], m[i], i);
+    map_0[i] = NULL;
     map[i] = NULL;
     
     free_tab(&m);
-    return (map);
+    maps->map_0 = map_0;
+    maps->map = map;
+    //return (map);
 }
 
 
-t_point3d **get_coordinates(int fd)
+void    get_coordinates(int fd, t_map *maps)
 {
     char *row; // buffer utilisé pour lire chaque ligne du fichier .fdf
     char *input; // concatène les lignes de l'input, et obtient ainsi un char* correspondant à l'entièreté de la map
@@ -120,5 +128,5 @@ t_point3d **get_coordinates(int fd)
         free(row);
         row = get_next_line(fd);
     }
-    return (fill_map(input, col_length));
+    fill_map(maps, input, col_length);
 }

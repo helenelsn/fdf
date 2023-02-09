@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 21:51:40 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/05 19:27:50 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:37:20 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
-#include "shapes.h"
 
-void	draw_line(t_data *img, t_point3d u1, t_point3d u2, unsigned int color);
+typedef struct	s_data 
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 /*
 Évènement clavier :     gere_key(int keycode, void *param);
@@ -90,25 +96,13 @@ int main()
     win_ptr = mlx_new_window(mlx_ptr, 800, 800, "Bonjour\n");
     img.img = mlx_new_image(mlx_ptr, 800, 800);
     img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
-   
-    // modifier la couleur du pixel (150, 270) :
 
-    t_point3d u;
-    t_point3d v;
-    u.x = 50;
-    u.y = 50;
-    v.x = 200;
-    v.y = 300;
-    
-    draw_line(&img, u, v, color); // tvb
-    
-    
-    
     
     mlx_put_image_to_window(mlx_ptr, win_ptr, img.img, 100, 100);
     
     
     mlx_hook(win_ptr, 33, 1L<<17, close2, mlx_ptr);
+   // mlx_hook(win_ptr, , , close2, mlx_ptr);
     mlx_loop(mlx_ptr);
     
     
