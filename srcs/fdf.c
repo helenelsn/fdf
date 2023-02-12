@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 21:01:46 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/09 18:29:27 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/12 16:58:17 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int main(int argc, char **argv)
     // ********************** A CODER *********************************
     
     get_coordinates(fd, &maps);
-    iso(&maps.map, 1, 500, 300);
-    print_map(maps.map);
+    iso(&maps.map, FACTOR, X_0, Y_0);
+    //print_map(maps.map);
     //put_points(mlx, map);
     
     draw_map(mlx, maps.map);
@@ -72,8 +72,9 @@ int main(int argc, char **argv)
   
     mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.image.img, 100, 100);
 
+    mlx_hook(mlx.win_ptr, 2, 1L<<0, key_press, mlx.mlx_ptr);
+    //mlx_key_hook(mlx.win_ptr, key_press, mlx.mlx_ptr);
     mlx_hook(mlx.win_ptr, 33, 1L<<17, close2, mlx.mlx_ptr);
-    mlx_hook(mlx.win_ptr, 2, 0, key_press, mlx.mlx_ptr);
     mlx_loop(mlx.mlx_ptr);
     
     

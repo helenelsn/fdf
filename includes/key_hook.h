@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_hooks.h                                        :+:      :+:    :+:   */
+/*   key_hook.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:14:33 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/09 18:29:45 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/12 16:19:38 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_HOOKS_H
 # define KEY_HOOKS_H
 
-# define KEY_ESC    53
-//# define KEY_I      34
-//# define KEY_O      
-//# define KEY_R      
-//# define KEY_L
-# define KEY_LEFT   123
-# define KEY_RIGHT  124
-# define KEY_DOWN   125
-# define KEY_UP     126
+# define KEY_ESC    65307
+# define KEY_I      105 // zoom in
+# define KEY_O      111 // zoom out
+# define KEY_R      114 // translate to the right
+# define KEY_L      108 // translate to the left
+# define KEY_U      117 // translate vers le haut
+# define KEY_D      100 // translate vers le bas
+
+// to rotate the map
+# define KEY_LEFT   65361 
+# define KEY_RIGHT  65363
+# define KEY_UP     65362
+# define KEY_DOWN   65364
 
 int	key_press(int keycode, void *mlx_ptr);
 

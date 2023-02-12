@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:45:50 by Helene            #+#    #+#             */
-/*   Updated: 2023/02/09 18:08:26 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/12 16:37:04 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ double deg_to_rad(double d);
 
 // part du principe que l'axe x est dirige vers l'observateur ; les deux rotations possibles sont alors celles autour des axes y et z
 
-void    z_rotate(t_map *maps, double angle)
+void    z_rotate(t_map *maps, double angle) // envoie un angle en degre
 {
     int i;
     int j;
@@ -36,11 +36,10 @@ void    z_rotate(t_map *maps, double angle)
             j++;
         }
         i++;
-    }
-       
+    }  
 }
 
-void    y_rotate(t_map *maps, double angle)
+void    y_rotate(t_map *maps, double angle) // envoie un angle en degre
 {
     int i;
     int j;
@@ -61,5 +60,13 @@ void    y_rotate(t_map *maps, double angle)
         }
         i++;
     }
-       
+}
+
+void    rotate(t_map *maps, int keycode)
+{
+    if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
+        z_rotate(maps, ((keycode == KEY_RIGHT) * 2 - 1) * 10);
+    else
+        y_rotate(maps, ((keycode == KEY_UP) * 2 - 1) * 10);
+    iso(maps->map, FACTOR, X_0, Y_0);
 }

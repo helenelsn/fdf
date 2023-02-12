@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 02:15:42 by Helene            #+#    #+#             */
-/*   Updated: 2023/02/09 18:31:01 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/12 16:36:01 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 #include "key_hook.h"
 
 #define HEXA "0123456789abcdef"
+
+// pour la projection isometrique
+# define FACTOR 1
+# define X_0 500
+# define Y_0 300
 
 typedef struct	s_data 
 {
