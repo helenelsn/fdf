@@ -6,7 +6,7 @@
 #    By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 23:23:23 by hlesny            #+#    #+#              #
-#    Updated: 2023/02/09 18:30:49 by hlesny           ###   ########.fr        #
+#    Updated: 2023/02/13 13:17:21 by hlesny           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ MINILIBX= ./minilibx-linux/libmlx_Linux.a
 
 SRCDIR = ./srcs/
 SRCS = 	fdf.c get_map.c draw_map.c draw_line.c projection.c mouse_hook.c put_points.c \
-		key_hook.c \
+		key_hook.c rotation.c translate.c zoom.c \
 		get_next_line.c get_next_line_utils.c ft_atoi.c ft_calloc.c  ft_split.c
 
 INC_DIR = ./includes/

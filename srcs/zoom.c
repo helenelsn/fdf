@@ -6,35 +6,50 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 01:40:15 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/09 16:42:03 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/13 22:37:53 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void    zoom(t_point3d ***map, int coef, int zoom_in) // a appliquer apres avoir transforme en coord iso
+void    print_map(t_point3d** map);
+
+void    zoom(t_data *data, int keycode) // a appliquer apres avoir transforme en coord iso
 {
     int i;
     int j;
 
     i = 0;
-    while ((*map)[i])
+    // print_map(data->maps->map_0);
+    // printf("\n\n\n");
+    // print_map(data->maps->map_0);
+    // printf("\n\n\n\n\n\n\n\n");
+    while ((data->maps->map)[i])
     {
         j = 0;
-        while (j == 0 || (j > 0 && (*map)[i][j].y != 0))
+        while (j == 0 || (j > 0 && (data->maps->map)[i][j].y != 0))
         {
-            if (zoom_in)
+            if (keycode == KEY_I) // zoom in
             {
-                (*map)[i][j].x *= coef;
-                (*map)[i][j].y *= coef;
+                (data->maps->map_0)[i][j].x *= ZOOM_COEF;
+                (data->maps->map_0)[i][j].y *= ZOOM_COEF;
+                (data->maps->map)[i][j].x *= ZOOM_COEF;
+                (data->maps->map)[i][j].y *= ZOOM_COEF;
             }   
             else
             {
-                (*map)[i][j].x /= coef;
-                (*map)[i][j].y /= coef;
+                (data->maps->map_0)[i][j].x /= ZOOM_COEF;
+                (data->maps->map_0)[i][j].y /= ZOOM_COEF;
+                (data->maps->map)[i][j].x /= ZOOM_COEF;
+                (data->maps->map)[i][j].y /= ZOOM_COEF;
             }
             j++;
         }
         i++;
     }
+    // print_map(data->maps->map_0);
+    // printf("\n\n\n");
+    //print_map(data->maps->map_0);
+    draw_map(data);
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->image.img, 100, 100);
 }

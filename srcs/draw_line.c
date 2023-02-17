@@ -6,7 +6,7 @@
 /*   By: hlesny <hlesny@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:56:48 by hlesny            #+#    #+#             */
-/*   Updated: 2023/02/08 21:49:22 by hlesny           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:54:06 by hlesny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static int      ft_abs(int x) // abs(x - y)
     return ((((x > 0) * 2) - 1) * x);
 }
 
-void    image_pixel_put(t_data *img, int x, int y, unsigned int color)
+void    image_pixel_put(t_image *img, int x, int y, unsigned int color)
 {
     char *dst;
 
-    if (x < 0 || x > 2000 || y < 0 || y > 1800)    
+    if (x < 0 || x > X_IMG || y < 0 || y > Y_IMG)    
         return ;
     //printf("img->addr = %s\n", img->addr);
     dst = img->addr + (img->line_length * y) + (x > 0) * (img->bpp / 8 * x); 
@@ -29,17 +29,7 @@ void    image_pixel_put(t_data *img, int x, int y, unsigned int color)
     *(unsigned int *)dst = color;
 }
 
-// int trgb : noir : rgb à 0 ; blanc : rgb à 255
-// définir (proportionnellement à z_max et z_min ?) la couleur associée à |z1 - z2|, en accord avec z1 et z2 (et |z|_max ?)
-// unsigned int compute_color(int z1, int z2)
-// {
-//     //unsigned int i;
-//     (void)z1;
-//     (void)z2;
-//     return (0xffffff);
-// }
-
-static void	    line_numerous_y(t_data *img, t_point3d u1, t_point3d u2)
+static void	    line_numerous_y(t_image *img, t_point3d u1, t_point3d u2)
 {
     int x;
     int y;
@@ -60,7 +50,7 @@ static void	    line_numerous_y(t_data *img, t_point3d u1, t_point3d u2)
     }
 }
 
-static void    line_numerous_x(t_data *img, t_point3d u1, t_point3d u2)
+static void    line_numerous_x(t_image *img, t_point3d u1, t_point3d u2)
 {
     int x;
     int y;
@@ -81,7 +71,7 @@ static void    line_numerous_x(t_data *img, t_point3d u1, t_point3d u2)
 }
 
 //void    draw_line(t_data *img, t_point u1, t_point u2, unsigned int color)
-void	draw_line(t_data *img, t_point3d u1, t_point3d u2)
+void	draw_line(t_image *img, t_point3d u1, t_point3d u2)
 {
     if (ft_abs(u1.x - u2.x) >= ft_abs(u1.y - u2.y))
         line_numerous_x(img, u1, u2);
